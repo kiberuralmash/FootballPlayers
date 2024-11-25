@@ -1,0 +1,149 @@
+﻿@page
+@model FootballPlayers.Pages.EditPlayerModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменение игрока</title>
+    <style>
+        form {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            background-color: #fff;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+            color: #555;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Изменение игрока</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="FirstName">Имя</label>
+            <input type="text" id="FirstName" name="Player.FirstName" value="@Model.Player.FirstName" autocomplete="given-name" required />
+        </div>
+        <input type="hidden" asp-for="Player.Id" />
+        <div class="form-group">
+            <label for="LastName">Фамилия</label>
+            <input type="text" id="LastName" name="Player.LastName" value="@Model.Player.LastName" autocomplete="family-name" required />
+        </div>
+        <div class="form-group">
+            <label for="Gender">Пол</label>
+            <select id="Gender" name="Player.Gender" required>
+                @if (Model.Player.Gender == "Male")
+                {
+                    <option value="Male" selected>Мужской</option>
+                    <option value="Female">Женский</option>
+                }
+                else
+                {
+                    <option value="Male">Мужской</option>
+                    <option value="Female" selected>Женский</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="BirthDate">Дата Рождения</label>
+            <input type="date" id="BirthDate" name="Player.BirthDate" value="@Model.Player.BirthDate.ToString("yyyy-MM-dd")" autocomplete="bday" required />
+        </div>
+        <div class="form-group">
+            <label for="Country">Страна</label>
+            <select id="Country" name="Player.Country" required>
+                @foreach (var country in new[] { "Россия", "США", "Италия" })
+                {
+                    if (Model.Player.Country == country)
+                    {
+                        <option value="@country" selected>@country</option>
+                    }
+                    else
+                    {
+                        <option value="@country">@country</option>
+                    }
+                }
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="TeamId">Команда</label>
+            <select id="TeamId" name="Player.TeamId" required>
+                <option value="">Select a team</option>
+                @foreach (var team in Model.Teams)
+                {
+                    if (Model.Player.TeamId == team.Id)
+                    {
+                        <option value="@team.Id" selected>@team.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@team.Id">@team.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <button type="submit">Сохранить изменения</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+﻿@page
+@model FootballPlayers.Pages.PlayerListModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Список игроков</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .player-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .player-table th, .player-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            .player-table th {
+                background-color: #f2f2f2;
+            }
+
+            .player-table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .btn-success {
+            background-color: #28a745;
+        }
+
+            .btn-success:hover {
+                background-color: #218838;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Список игроков</h2>
+
+        <table class="player-table">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Пол</th>
+                    <th>Дата Рождения</th>
+                    <th>Страна</th>
+                    <th>Team</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in Model.Players)
+                {
+                    <tr>
+                        <td>@player.FirstName</td>
+                        <td>@player.LastName</td>
+                        <td>@player.Gender</td>
+                        <td>@player.BirthDate.ToShortDateString()</td>
+                        <td>@player.Country</td>
+                        <td>@player.Team?.Name </td>
+                        <td>
+                            <a href="/EditPlayer?id=@player.Id" class="btn btn-primary">Изменить</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a href="/AddPlayer" class="btn btn-success">Добавить игрока</a>
+    </div>
+
+</body>
+</html>

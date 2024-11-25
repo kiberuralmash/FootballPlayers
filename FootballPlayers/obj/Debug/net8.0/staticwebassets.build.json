@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "q5s1iv6KjcNaaQQ7OWM525rsON9to0Q36yY7ue9ey4w=",
+  "Source": "FootballPlayers",
+  "BasePath": "_content/FootballPlayers",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "FootballPlayers\\wwwroot",
+      "Source": "FootballPlayers",
+      "ContentRoot": "C:\\Users\\Student_KiberOne\\source\\repos\\FootballPlayers\\FootballPlayers\\wwwroot\\",
+      "BasePath": "_content/FootballPlayers",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
